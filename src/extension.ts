@@ -6,7 +6,7 @@ import * as vscode from "vscode";
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
   context.subscriptions.push(
-    vscode.commands.registerCommand("reproduzAudio", () => {
+    vscode.commands.registerCommand("er-prototipo-1-1.reproduzAudio", () => {
       // Create and show panel
       const panel = vscode.window.createWebviewPanel(
         "reproduzAudio",
