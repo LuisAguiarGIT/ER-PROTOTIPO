@@ -4,13 +4,12 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
     <!-- Style CSS -->
     <style>
-      
       body{
         background-color: #222;
       }
@@ -20,75 +19,99 @@
         background-attachment: local;
         background-repeat: no-repeat;
         padding-left: 30px;
-        padding-top:10px;
+        padding-top: 10px;
         border-color:#ccc;
         background-color: #333;
         resize:both;
         font-size: 12px;
       }
-      
+  
       #texto{
-        color: cyan;
+        color:lightskyblue;
       }
-    </style>
+  
+      #cabecalho{
+        background-color: #444;
+        border-radius: 10px;
+        height: 80px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        margin-right: 20px;  
+      }
+
+      #titulo{
+        color: yellow;
+        text-align: center;
+      }
+
+      #send-bt{
+        border-color:#333;
+      }
+
+      #launch-bt{
+        margin-top: 20px;
+        margin-left: 70px;
+      }
+
+    </style> 
+
     <title>Hello, world!</title>
   </head>
   <body>
-
+    <div id="cabecalho">
+      <h1 id="titulo">CodeMent</h1>
+    </div>
+    
     <div class="container">
-        <div class="row">
+      <div class="row">
 
-          <form method="POST" action="/ola">
+        <form method="POST" action="/ola">
             
-            <textarea id="texto" wrap="off" rows="10" cols="100" name="texto"></textarea>
+          <textarea id="texto" wrap="off" rows="10" cols="180" name="texto"></textarea>
 
            
-            <br>
+          <br>
+          <br>
 
-
-            <div>
-              <button class="btn btn-outline-success" type="submit">
+          <div>
+            <button id="send-bt" class="btn btn-outline-success" type="submit">
                   Send
-              </button>
+            </button>
           </div>
         </form>
-
-
-            
-
-              <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Texto selecionado</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p id="demo"></p>
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
+       
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Texto selecionado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-          
-
+              <div class="modal-body">
+                <p id="demo"></p>
+                    ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <button type="button" class="btn btn-primary"  onclick="ShowSelection()"  data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button>
+    <button id="launch-bt" type="button" class="btn btn-primary"  onclick="ShowSelection()"  data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
 
     
 
-        <!-- Button trigger modal -->
+    <!-- Button trigger modal -->
         
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -120,5 +143,5 @@
 
     </script>
 
-</body>
+  </body>
 </html>
