@@ -10,14 +10,26 @@
     
     <!-- Style CSS -->
     <style>
+      
+      body{
+        background-color: #222;
+      }
+
       textarea{
         background: url(http://i.imgur.com/2cOaJ.png);
         background-attachment: local;
         background-repeat: no-repeat;
-        padding-left: 35px;
-        padding-top: 10px;
+        padding-left: 30px;
+        padding-top:10px;
         border-color:#ccc;
-    }
+        background-color: #333;
+        resize:both;
+        font-size: 12px;
+      }
+      
+      #texto{
+        color: cyan;
+      }
     </style>
     <title>Hello, world!</title>
   </head>
@@ -28,7 +40,7 @@
 
           <form method="POST" action="/ola">
             
-            <textarea id="texto" rows="10" cols="40" name="texto"></textarea>
+            <textarea id="texto" wrap="off" rows="10" cols="100" name="texto"></textarea>
 
            
             <br>
