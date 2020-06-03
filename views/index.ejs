@@ -50,13 +50,12 @@
       }
 
       #launch-bt{
-        margin-top: 20px;
-        margin-left: 70px;
+        border-color:#333;
       }
 
     </style> 
 
-    <title>Hello, world!</title>
+    <title>CodeMent</title>
   </head>
   <body>
     <div id="cabecalho">
@@ -77,6 +76,9 @@
           <div>
             <button id="send-bt" class="btn btn-outline-success" type="submit">
                   Send
+            </button>
+            <button id="launch-bt" type="button" class="btn btn-outline-success"  onclick="ShowSelection()"  data-toggle="modal" data-target="#exampleModal">
+              Comentários
             </button>
           </div>
         </form>
@@ -104,10 +106,7 @@
         </div>
       </div>
     </div>
-
-    <button id="launch-bt" type="button" class="btn btn-primary"  onclick="ShowSelection()"  data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-    </button>
+    
 
     
 
