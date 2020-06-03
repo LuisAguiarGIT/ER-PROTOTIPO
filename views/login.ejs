@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Style CSS -->
+    <style>
+        body{
+          background-color: #222;
+        }
+        label{
+            color:#ccc;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+  
+        textarea{
+          background: url(http://i.imgur.com/2cOaJ.png);
+          background-attachment: local;
+          background-repeat: no-repeat;
+          padding-left: 30px;
+          padding-top: 10px;
+          border-color:#ccc;
+          background-color: #333;
+          resize:both;
+          font-size: 12px;
+        }
+    
+        #texto{
+          color:lightskyblue;
+        }
+    
+        #cabecalho{
+          background-color: #444;
+          border-radius: 10px;
+          height: 80px;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          margin-left: 20px;
+          margin-right: 20px;  
+        }
+
+        #formulario{
+          background-color: #444;
+          border-radius: 10px;
+          height: 500px;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          margin-left: 20px;
+          margin-right: 20px; 
+          align-content: center; 
+        }
+        
+        #titulo{
+          color: yellow;
+          text-align: center;
+        }
+  
+        .form-control{
+            width: 300px;
+            margin-left: 20px;
+        }
+
+        #emailHelp{
+            margin-left: 20px;
+        }
+        #submit-bt{
+            margin-left: 20px;
+        }
+  
+      </style>
+    <title>login</title>
+</head>
+<body>
+    <div id="cabecalho">
+        <h1 id="titulo">CodeMent</h1>
+    </div>
+    <div id="formulario"> 
+        <form method="POST" action="/CodeMent">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div>
+              
+                <label for="uc">Unidade Curricular:</label>
+                <select id="type">
+                    <option value="item0">-- Unidade Curricular --</option>
+                    <option value="item1">Paradigmas da Programação</option>
+                    <option value="item2">Estrutura de Dados e Algoritmos</option>
+                    <option value="item3">Sistemas Digitais</option>
+                    <option value="item4">Arquitetura de Computadores</option>
+                    <option value="item5">Programação Orientada a Objetos</option>
+                    <option value="item6">Sistemas Gestores de Base de Dados</option>
+                    <option value="item7">Sistemas Operativos</option>
+                    <option value="item8">Processos e Métricas de Software</option>
+                    <option value="item9">Engenharia de Requisitos</option>
+                </select>
+            </div>
+            <div>
+                <label for="docente">Docente:</label>
+                <select id="size">
+                    <option value="">-- Docente --</option>
+                </select>
+            </div>
+            
+            <button type="submit" id="submit-bt" class="btn btn-primary">Entrar</button>
+        </form>
+    </div>
+    
+    <!-- Button trigger modal -->
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script>
+     $(document).ready(function () {
+        $("#type").change(function () {
+        var val = $(this).val();
+        if (val == "item1") {
+            $("#size").html("<option value='test'>Frederica Gonçalves</option><option value='test2'>Luís Camacho</option><option value='test3'>Pedro Valente</option>");
+        } else if (val == "item2") {
+            $("#size").html("<option value='test'>Filipe Quintal</option><option value='test2'>Karolina Baras</option>");
+        } else if (val == "item3") {
+            $("#size").html("<option value='test'>Morgado Dias</option><option value='test2'>Tiago Meireles</option><option value='test3'>Pedro Camacho</option>");
+        } else if (val == "item4") {
+            $("#size").html("<option value='test'>Dionísio Barros</option><option value='test2'>Sofia Inácio</option><option value='test3'>Pedro Camacho</option><option value='test4'>Nuno Ferreira</option>");
+        } else if (val == "item5") {
+            $("#size").html("<option value='test'>Mónica Cameirão</option><option value='test2'>Sergi Bermúdez Badia</option>");
+        } else if (val == "item6") {
+            $("#size").html("<option value='test'>David Aveiro</option>");
+        } else if (val == "item7") {
+            $("#size").html("<option value='test'>Eduardo Marques</option><option value='test2'>Luís Gaspar</option>");
+        } else if (val == "item8") {
+            $("#size").html("<option value='test'>Pedro Campos</option><option value='test2'>Filipe Quintal</option>");
+        } else if (val == "item9") {
+            $("#size").html("<option value='test'>Filipe Quintal</option>");
+        } else if (val == "item0") {
+            $("#size").html("<option value=''>-- Docente --</option>");
+        }
+        });
+    });
+    </script>
+</body>
+</html>
