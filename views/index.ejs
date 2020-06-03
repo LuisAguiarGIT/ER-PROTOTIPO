@@ -77,7 +77,7 @@
             <button id="send-bt" class="btn btn-outline-success" type="submit">
                   Send
             </button>
-            <button id="launch-bt" type="button" class="btn btn-outline-success"  onclick="ShowSelection()"  data-toggle="modal" data-target="#exampleModal">
+            <button id="launch-bt" type="button" class="btn btn-outline-success"  onclick="abrir()" >
               Comentários
             </button>
           </div>
@@ -95,11 +95,22 @@
               </div>
               <div class="modal-body">
                 <p id="demo"></p>
-                    ...
+                
+                <div id="s_com">
+
+                  <p>Não foram encontrados comentários.</p>
+                  <p>Quer adicionar comentários ?</p>
+                  <button type="button" class="btn" onclick="comentar('sim')">Sim</button>
+                  <button type="button" class="btn" data-dismiss="modal">Não</button>
+                  <div id="s_com_sim">
+                    <textarea></textarea>
+                  </div>
+                </div>
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="comentar('enviar')">Save changes</button>
               </div>
             </div>
           </div>
@@ -107,22 +118,69 @@
       </div>
     </div>
     
-
+    
     
 
     <!-- Button trigger modal -->
         
     
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   
     <script>
+      var textComponent = document.getElementById('texto');
+      var selectedText;
+      function abrir(){
+        ShowSelection();
+
+        if (selectedText.length > 0){
+          $("#exampleModal").modal()
+          comentar();
+        } 
+      }
+      
+
+      
+      var comentarios = '<%= comentarios %>';
+      console.log(comentarios);
+      //var comentarios = [];
+
+      var s_com = document.getElementById("s_com");
+      var s_com_sim = document.getElementById("s_com_sim");
+
+      function comentar(texto){
+        console.log(texto);
+        console.log(comentarios);
+        s_com_sim.style.display = "none";
+        if(comentarios =! [] && texto ==! "sim") {
+          s_com.style.display = "none";
+        } 
+
+        if(texto == 'sim'){
+          s_com_sim.style.display = "block";
+        }
+
+        if(texto == "enviar"){
+          //comentarios.push("selectedText");
+
+          $.post("/",
+          {
+            texto: selectedText
+          },
+          function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
+          });
+
+        }
+        console.log(comentarios)
+
+      }
+
+
 
       function ShowSelection()
         {
-            var textComponent = document.getElementById('texto');
-            var selectedText;
+            
 
             if (textComponent.selectionStart !== undefined)
             {// Standards Compliant Version
@@ -136,7 +194,7 @@
               var sel = document.selection.createRange();
               selectedText = sel.text;
             }
-            document.getElementById("demo").innerHTML = selectedText;
+            document.getElementById("demo").innerHTML = '"' + selectedText + '"';
             //alert("You selected: " + selectedText);
         }
 
