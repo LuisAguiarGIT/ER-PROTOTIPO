@@ -2,12 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 var comentarios = [];
-router.get('/', function(req, res, next) {
+router.get('/CodeMent', function(req, res, next) {
   res.render('index', { title: 'Express', comentarios:comentarios });
   numbers = req.body.numbers;
   console.log(numbers);
 });
 
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'Express', comentarios:comentarios });
+  numbers = req.body.numbers;
+  console.log(numbers);
+});
 
 router.post('/', (req,res) => {
   
