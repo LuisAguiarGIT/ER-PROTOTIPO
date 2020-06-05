@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+          
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        
+    <!-- Style CSS -->
+    <style>
+        body{
+            background-color: #333;
+        }
+        
+        label{
+            color:#ccc;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+      
+        textarea{
+            background: url(http://i.imgur.com/2cOaJ.png);
+            background-attachment: local;
+            background-repeat: no-repeat;
+            padding-left: 30px;
+            padding-top: 10px;
+            border-color:#ccc;
+            background-color: #333;
+            resize:both;
+            font-size: 12px;
+        }
+
+        h4{
+            color: #ccc;
+        }
+
+        p{
+            color: #ccc;
+        }
+        
+        footer{
+            margin-top: 40px;
+            text-align: center;
+        }
+        #texto{
+            color:lightskyblue;
+        }
+        
+        #cabecalho{
+            background-color: #444;
+            border-radius: 10px;
+            height: 80px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            background-image: linear-gradient(#444,#222);  
+        }
+    
+        #formulario{
+            background-color: #444;
+            border-radius: 10px;
+            height: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px; 
+            align-content: center; 
+        }
+            
+        #titulo{
+            color: yellow;
+            text-align: center;
+        }
+      
+        .form-control{
+            width: 300px;
+            margin-left: 20px;
+        }
+    
+        #emailHelp{
+            margin-left: 20px;
+        }
+        
+        #submit-bt{
+            margin-left: 20px;
+        }
+        
+        .accordion{
+            margin-left: 20px;
+            margin-right: 20px;
+            box-shadow: 1px 10px 10px #222;
+            border-radius: 20px;
+        }
+
+        .card-header{
+           background-color: #444;
+           background-image: linear-gradient(#444,#222);
+       } 
+
+       .card-body{
+           background-color: #222;
+       }
+
+        #enu_freq{
+           color:#ccc;
+       }
+      </style>
+    <title>backoffice</title>
+</head>
+<body>
+    
+        <div class="shadow p-3 mb-5" id="cabecalho">
+            <h1 id="titulo">CodeMent</h1>
+        </div>
+    
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Docentes
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                    <form id="assistente" action="" method="POST">
+                       <label for="uc">Escolha a Unidade Curricular que está a lecionar:</label>
+                       <select id="type">
+                           <option value="item0">-- Unidade Curricular --</option>
+                           <option value="item1">Paradigmas da Programação</option>
+                           <option value="item2">Estrutura de Dados e Algoritmos</option>
+                           <option value="item3">Sistemas Digitais</option>
+                           <option value="item4">Arquitetura de Computadores</option>
+                           <option value="item5">Programação Orientada a Objetos</option>
+                           <option value="item6">Sistemas Gestores de Base de Dados</option>
+                           <option value="item7">Sistemas Operativos</option>
+                           <option value="item8">Processos e Métricas de Software</option>
+                           <option value="item9">Engenharia de Requisitos</option>
+                       </select>
+                   <div>
+                       <label for="docente">Escolha o assistente:</label>
+                       <select id="size">
+                           <option value="">-- Docente --</option>
+                       </select>
+                   </div>
+                   <div>
+                        <button type="submit" id="submit-bt" class="btn btn-outline-light">Gravar</button>
+                   </div>
+                   </form>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Formar Grupos
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                <form id="criar-grupos" action="/backoffice" method="POST">
+                    <label for="alunos">Aluno:</label>
+                    <select name="aluno" id="aluno">
+                        <option value="">-- aluno --</option>
+                        <option value="">aluno1</option>
+                        <option value="">aluno2</option>
+                        <option value="">aluno3</option>
+                        <option value="">aluno4</option>
+                        <option value="">aluno5</option>
+                    </select>
+                    <div>
+                        <label for="grupos">Grupo:</label>
+                        <select name="grupo" id="grupo">
+                            <option value="">-- grupo (máx 5 elementos)--</option>
+                            <option value="">Grupo 1</option>
+                            <option value="" disabled>Grupo 2 (Completo!)</option>
+                            <option value="">Grupo 3</option>
+                            <option value="" disabled>Grupo 4 (Completo!)</option>
+                            <option value="">Grupo 5</option>
+                            <option value="" disabled>Grupo 6 (Completo!)</option>
+                            <option value="">Grupo 7</option>
+                            <option value="">Grupo 8</option>
+                            <option value="">Grupo 9</option>
+                            <option value="" disabled>Grupo 10 (Completo!)</option>
+                            <option value="" disabled>Grupo 11 (Completo!)</option>
+                            <option value="" disabled>Grupo 12 (Completo!)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" id="submit-bt" class="btn btn-outline-light">Gravar</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Avaliações
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+              <form id="avaliacao" action="/backoffice" method="POST"></form>
+                  <h4>Criar novo momento de avaliação:</h4>
+                  <div>
+                    <label for="enunciado">Enunciado:</label>
+                    <input type="file" name="enu_freq" id="enu_freq">
+                  </div>
+                  <div>
+                    <label for="data">Data:</label>
+                    <input type="date" name="data-freq" id="data-freq">
+                  </div>
+                  <div>
+                      <label for="tempo">Tempo limite:</label>
+                      <input type="time" name="tempo-lim" id="tempo-lim">
+                  </div>
+                  <div>
+                        <button type="submit" id="submit-bt" class="btn btn-outline-light">Criar Avaliação</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+              <h2 class="mb-0">
+                <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Esclarecimento de dúvidas
+                </button>
+              </h2>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div>
+                        <h4>Falta decidir esta merda!</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <footer>
+            <p>&copy; Grupo 5 - Engenharia de Requisitos 2019/2020</p>
+        </footer>
+    </div>
+        
+
+    <!-- Button trigger modal -->   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+           $("#type").change(function () {
+           var val = $(this).val();
+           if (val == "item1") {
+               $("#size").html("<option value='test'>Frederica Gonçalves</option><option value='test2'>Luís Camacho</option><option value='test3'>Pedro Valente</option>");
+           } else if (val == "item2") {
+               $("#size").html("<option value='test'>Filipe Quintal</option><option value='test2'>Karolina Baras</option>");
+           } else if (val == "item3") {
+               $("#size").html("<option value='test'>Morgado Dias</option><option value='test2'>Tiago Meireles</option><option value='test3'>Pedro Camacho</option>");
+           } else if (val == "item4") {
+               $("#size").html("<option value='test'>Dionísio Barros</option><option value='test2'>Sofia Inácio</option><option value='test3'>Pedro Camacho</option><option value='test4'>Nuno Ferreira</option>");
+           } else if (val == "item5") {
+               $("#size").html("<option value='test'>Mónica Cameirão</option><option value='test2'>Sergi Bermúdez Badia</option>");
+           } else if (val == "item6") {
+               $("#size").html("<option value='test'>David Aveiro</option>");
+           } else if (val == "item7") {
+               $("#size").html("<option value='test'>Eduardo Marques</option><option value='test2'>Luís Gaspar</option>");
+           } else if (val == "item8") {
+               $("#size").html("<option value='test'>Pedro Campos</option><option value='test2'>Filipe Quintal</option>");
+           } else if (val == "item9") {
+               $("#size").html("<option value='test'>Filipe Quintal</option>");
+           } else if (val == "item0") {
+               $("#size").html("<option value=''>-- Docente --</option>");
+           }
+           });
+       });
+    </script>
+</body>
+</html>
