@@ -29,11 +29,11 @@
       box-shadow: 1px 10px 10px #222;
     }
 
-    footer{
-      text-align:center;
+    footer {
+      text-align: center;
     }
 
-    #footer{
+    #footer {
       color: #ccc;
     }
 
@@ -49,14 +49,13 @@
       margin-bottom: 20px;
       margin-left: 20px;
       margin-right: 20px;
-      background-image: linear-gradient(#444,#222); 
+      background-image: linear-gradient(#444, #222);
     }
 
     #titulo {
       color: yellow;
       text-align: center;
     }
-
   </style>
 
   <title><%= title %></title>
@@ -112,6 +111,12 @@
                     <button type="button" class="btn" data-dismiss="modal">Não</button>
                     <div id="s_com_sim">
                       <textarea id="coment"></textarea>
+                      <!-- Gravação -->
+                      <section class="main-controls">
+                        <button class="record">COMEÇA GRAVAÇÃO</button>
+                        <button class="stop">PARAR GRAVAÇÃO</button>
+                      </section>
+                      <section class="sound-clips"></section>
                     </div>
                   </div>
                 </div>
@@ -120,6 +125,10 @@
               <div id="ler_comentario">
 
 
+
+              </div>
+
+              <div id="reproduzir_audio">
 
               </div>
 
@@ -135,7 +144,7 @@
   </div>
   <div>
     <footer>
-        <p id="footer">&copy; Grupo 5 - Engenharia de Requisitos 2019/2020</p>
+      <p id="footer">&copy; Grupo 5 - Engenharia de Requisitos 2019/2020</p>
     </footer>
   </div>
 
@@ -152,7 +161,7 @@
     crossorigin="anonymous"></script>
 
   <script>
-      
+
     function abrir() {
       ShowSelection();
 
@@ -160,7 +169,7 @@
         $("#exampleModal").modal()
         ler_comentario();
         comentar();
-        
+
       }
     }
 
@@ -197,13 +206,13 @@
         success: function (data1) {
 
 
-          $("#ler_comentario").empty(); 
+          $("#ler_comentario").empty();
 
           console.log($('#ler_comentario').removeData);
 
           console.log('success');
           console.log(JSON.stringify(data1));
-          
+
           console.log(data1.length);
 
           if (data1.length == 0) {
@@ -216,12 +225,14 @@
               var panelBody = "";
               panelBody += '<div id="2" class="card">';
               panelBody += '<div class="card-header">';
-              panelBody += (i+1)+'º Comentário';
+              panelBody += (i + 1) + 'º Comentário';
               panelBody += '</div>';
               panelBody += '<div class="card-body">';
               panelBody += '<blockquote class="blockquote mb-0">';
-              panelBody += '<p>'+data1[i][1]+'</p>';
-              panelBody += '<footer class="blockquote-footer">'+data1[i][2]+'</footer>';
+              panelBody += '<p>' + data1[i][1] + '</p>';
+              // panelBody += '<audio href="' + data1[i][2] + '" controls' + '>' + '</audio>';
+              panelBody += '<audio controls src="' + data1[i][2] + '"> </audio>';
+              panelBody += '<footer class="blockquote-footer">' + data1[i][3] + '</footer>';
               panelBody += '</blockquote>';
               panelBody += '</div>';
               panelBody += '</div>';
@@ -232,7 +243,7 @@
           }
 
 
-    
+
 
         }
       });
@@ -240,10 +251,11 @@
 
     }
 
+
     var s_com = document.getElementById("s_com");
     var s_com_sim = document.getElementById("s_com_sim");
 
-    
+
 
     function comentar(texto) {
 
@@ -264,6 +276,7 @@
         data.what = "enviar_comentario";
         data.id = selectedText;
         data.comment = comment;
+        data.audio = audioURL;
 
         $.ajax({
           type: 'POST',
@@ -274,14 +287,155 @@
             console.log('success');
             console.log(JSON.stringify(data));
             ler_comentario();
-            
+
           }
         });
 
-        
       }
     }
-    
+
+    let audioURL;
+    // set up basic variables for app
+
+    const record = document.querySelector('.record');
+    const stop = document.querySelector('.stop');
+    const soundClips = document.querySelector('.sound-clips');
+    const mainSection = document.querySelector('.main-controls');
+
+    const recording = document.createElement('section');
+
+    let recognition = new webkitSpeechRecognition();
+
+    // disable stop button while not recording
+
+    stop.disabled = true;
+
+    //main block for doing the audio recording
+
+    if (navigator.mediaDevices.getUserMedia) {
+      console.log('getUserMedia supportado.');
+
+      const constraints = { audio: true };
+      let chunks = [];
+
+      let onSuccess = function (stream) {
+        const mediaRecorder = new MediaRecorder(stream);
+
+        record.onclick = function () {
+          mediaRecorder.start();
+          console.log(mediaRecorder.state);
+          console.log("Gravação iniciada");
+          record.style.background = "red";
+
+          stop.disabled = false;
+          record.disabled = true;
+
+          voiceRecognition();
+        }
+
+        stop.onclick = function () {
+          mediaRecorder.stop();
+          console.log(mediaRecorder.state);
+          console.log("Gravação interrompida");
+          record.style.background = "";
+          record.style.color = "";
+          // mediaRecorder.requestData();
+
+          stop.disabled = true;
+          record.disabled = false;
+
+          recognition.continuous = false;
+          recognition.stop();
+        }
+
+        mediaRecorder.onstop = function (e) {
+          console.log("Dados disponíveis depois de MediaRecorder.stop() ser chamado");
+
+          const clipName = prompt('Introduza o nome do ficheiro audio', 'Nome do ficheiro');
+
+          const clipContainer = document.createElement('article');
+          const clipLabel = document.createElement('p');
+          const audio = document.createElement('audio');
+          const deleteButton = document.createElement('button');
+          const downloadButton = document.createElement('a');
+
+          clipContainer.classList.add('clip');
+          audio.setAttribute('controls', '');
+          audio.setAttribute('controls', 'download')
+          deleteButton.textContent = 'Delete';
+          deleteButton.className = 'delete';
+
+          if (clipName === null) {
+            clipLabel.textContent = 'Nome do ficheiro';
+          } else {
+            clipLabel.textContent = clipName;
+          }
+
+          clipContainer.appendChild(audio);
+          clipContainer.appendChild(clipLabel);
+          clipContainer.appendChild(deleteButton);
+          recording.appendChild(clipContainer);
+          soundClips.appendChild(recording);
+
+          audio.controls = true;
+          const blob = new Blob(chunks, { 'type': 'audio/mpeg' });
+          chunks = [];
+          audioURL = window.URL.createObjectURL(blob);
+          console.log(audioURL);
+          audio.src = audioURL;
+          console.log("Gravação interrompida");
+          downloadButton.href = audioURL;
+          downloadButton.download = "ficheiroAudio.mp3";
+          downloadButton.innerHTML = "DOWNLOAD";
+          soundClips.appendChild(downloadButton);
+
+          deleteButton.onclick = function (e) {
+            let evtTgt = e.target;
+            evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+          }
+
+          clipLabel.onclick = function () {
+            const existingName = clipLabel.textContent;
+            const newClipName = prompt('Introduza um novo nome para o ficheiro de som');
+            if (newClipName === null) {
+              clipLabel.textContent = existingName;
+            } else {
+              clipLabel.textContent = newClipName;
+            }
+          }
+        }
+
+        mediaRecorder.ondataavailable = function (e) {
+          chunks.push(e.data);
+        }
+      }
+
+      let onError = function (err) {
+        console.log('O erro seguinte ocorreu: ' + err);
+      }
+
+      navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
+
+    } else {
+      console.log('getUserMedia não suportado!');
+    }
+
+    function voiceRecognition() {
+      recognition.continuous = true;
+
+      recognition.onresult = function (event) {
+        console.log(event);
+        let output = document.createElement("p");
+        output.innerHTML = "";
+
+        for (let i = 0; i < event.results.length; i++) {
+          output.innerHTML = output.innerHTML + event.results[i][0].transcript;
+        }
+        console.log(output);
+        recording.appendChild(output);
+      }
+      recognition.start();
+    }
   </script>
 </body>
 
