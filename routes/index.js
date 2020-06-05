@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
+var file = fs.createWriteStream("comentarios.txt");
+
 
 let comentarios = new Array();
 let comentario_exp;
@@ -15,17 +18,19 @@ router.post('/', (req, res) => {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-
+    
     today = mm + '/' + dd + '/' + yyyy;
 
     var valueToPush = new Array();
     valueToPush[0] = req.body.id;
     valueToPush[1] = req.body.comment;
     valueToPush[2] = today;
+    
     comentarios.push(valueToPush);
-
     res.send(comentarios);
 
+    comentarios.forEach(function(v) {file.write(v.join(',') + '\n'); });
+    //file.end();
   } else if (req.body.what == "ler_comentario") {
 
     comentario_exp = new Array();

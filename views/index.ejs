@@ -152,7 +152,7 @@
     crossorigin="anonymous"></script>
 
   <script>
-
+      
     function abrir() {
       ShowSelection();
 
@@ -160,7 +160,7 @@
         $("#exampleModal").modal()
         ler_comentario();
         comentar();
-
+        
       }
     }
 
@@ -203,7 +203,7 @@
 
           console.log('success');
           console.log(JSON.stringify(data1));
-
+          
           console.log(data1.length);
 
           if (data1.length == 0) {
@@ -243,6 +243,8 @@
     var s_com = document.getElementById("s_com");
     var s_com_sim = document.getElementById("s_com_sim");
 
+    
+
     function comentar(texto) {
 
       console.log(texto);
@@ -272,12 +274,14 @@
             console.log('success');
             console.log(JSON.stringify(data));
             ler_comentario();
+            
           }
         });
 
+        
       }
     }
-
+    
   </script>
 </body>
 

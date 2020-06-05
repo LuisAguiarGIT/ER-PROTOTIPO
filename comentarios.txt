@@ -1,0 +1,15 @@
+if (req.body.what == "enviar_comentario") {,Ola,06/05/2020
+if (req.body.what == "enviar_comentario") {,Ola,06/05/2020
+    res.send(comentarios);,HELLO,06/05/2020
+if (req.body.what == "enviar_comentario") {,Ola,06/05/2020
+    res.send(comentarios);,HELLO,06/05/2020
+  res.send(comentarios);,ola,06/05/2020
+if (req.body.what == "enviar_comentario") {,Ola,06/05/2020
+    res.send(comentarios);,HELLO,06/05/2020
+  res.send(comentarios);,ola,06/05/2020
+    //file.end();,shit,06/05/2020
+if (req.body.what == "enviar_comentario") {,Ola,06/05/2020
+    res.send(comentarios);,HELLO,06/05/2020
+  res.send(comentarios);,ola,06/05/2020
+    //file.end();,shit,06/05/2020
+if (req.body.what == "enviar_comentario") {,TEMPO,06/05/2020
