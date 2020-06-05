@@ -18,14 +18,13 @@ router.post('/', (req, res) => {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    
-    today = mm + '/' + dd + '/' + yyyy;
+    var hora = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    today = mm + '/' + dd + '/' + yyyy + ' - ' + hora;
 
     var valueToPush = new Array();
     valueToPush[0] = req.body.id;
     valueToPush[1] = req.body.comment;
     valueToPush[2] = today;
-    
     comentarios.push(valueToPush);
     res.send(comentarios);
 
