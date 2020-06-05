@@ -1,18 +1,20 @@
 var express = require('express');
 var router = express.Router();
 
-var comentarios = [];
+var comentarios = new Array();
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', comentarios:comentarios });
+  res.render('index', { title: 'CodeMent -- IDE', comentarios:comentarios });
   numbers = req.body.numbers;
   console.log(numbers);
 });
 
-
 router.post('/', (req,res) => {
   
-  console.log(req.body.texto);
-  comentarios.push('"'+req.body.texto+'"');
+  var valueToPush = new Array();
+  valueToPush[0] = req.body.id;
+  valueToPush[1] = req.body.comment;
+  comentarios.push(valueToPush);
+
   console.log(comentarios)
 
 });
