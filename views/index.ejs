@@ -1,204 +1,284 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    
-    <!-- Style CSS -->
-    <style>
-      body{
-        background-color: #222;
-      }
 
-      textarea{
-        background: url(http://i.imgur.com/2cOaJ.png);
-        background-attachment: local;
-        background-repeat: no-repeat;
-        padding-left: 30px;
-        padding-top: 10px;
-        border-color:#ccc;
-        background-color: #333;
-        resize:vertical;
-        font-size: 12px;
-      }
-  
-      #texto{
-        color:lightskyblue;
-      }
-  
-      #cabecalho{
-        background-color: #444;
-        border-radius: 10px;
-        height: 80px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        margin-left: 20px;
-        margin-right: 20px;  
-      }
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      #titulo{
-        color: yellow;
-        text-align: center;
-      }
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-      #send-bt{
-        border-color:#333;
-      }
+  <!-- Style CSS -->
+  <style>
+    body {
+      background-color: #333333;
+    }
 
-      #launch-bt{
-        border-color:#333;
-      }
+    textarea {
+      background: url(http://i.imgur.com/2cOaJ.png);
+      background-attachment: local;
+      background-repeat: no-repeat;
+      padding-left: 30px;
+      padding-top: 10px;
+      border-color: #ccc;
+      background-color: #333;
+      resize: both;
+      font-size: 12px;
+      box-shadow: 1px 10px 10px #222;
+    }
 
-    </style> 
+    footer{
+      text-align:center;
+    }
 
-    <title>CodeMent</title>
-  </head>
-  <body>
-    <div id="cabecalho">
-      <h1 id="titulo">CodeMent</h1>
-    </div>
-    
-    <div class="container">
-      <div class="row">
+    #footer{
+      color: #ccc;
+    }
 
-        <form method="POST" action="/ola">
-            
-          <textarea id="texto" wrap="off" rows="10" cols="180" name="texto"></textarea>
+    #texto {
+      color: lightskyblue;
+    }
 
-           
-          <br>
-          <br>
+    #cabecalho {
+      background-color: #444;
+      border-radius: 10px;
+      height: 80px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+      background-image: linear-gradient(#444,#222); 
+    }
 
-          <div>
-            <button id="send-bt" class="btn btn-outline-success" type="submit">
-                  Send
-            </button>
-            <button id="launch-bt" type="button" class="btn btn-outline-success"  onclick="abrir()" >
-              Comentários
-            </button>
-          </div>
-        </form>
-       
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Texto selecionado</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p id="demo"></p>
-                
-                <div id="s_com">
+    #titulo {
+      color: yellow;
+      text-align: center;
+    }
 
-                  <p>Não foram encontrados comentários.</p>
-                  <p>Quer adicionar comentários ?</p>
-                  <button type="button" class="btn" onclick="comentar('sim')">Sim</button>
-                  <button type="button" class="btn" data-dismiss="modal">Não</button>
-                  <div id="s_com_sim">
-                    <textarea></textarea>
+  </style>
+
+  <title><%= title %></title>
+</head>
+
+<body>
+  <div class="shadow p-3 mb-5" id="cabecalho">
+    <h1 id="titulo"><%= title %></h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+
+      <form method="POST" action="/ola">
+
+        <textarea id="texto" wrap="off" rows="20" cols="180" name="texto"></textarea>
+
+
+        <br>
+        <br>
+
+        <div>
+          <button id="launch-bt" type="button" class="btn btn-outline-light" onclick="abrir()">
+            Comentários
+          </button>
+        </div>
+      </form>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Comentários</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+
+              <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">Código selecionado:</div>
+                <div class="card-body">
+                  <p class="card-text" id="demo"></p>
+                </div>
+                <div class="card-footer text-white">
+                  <div id="s_com">
+                    <h7>Quer adicionar comentários ?</h7>
+                    <br>
+                    <button type="button" class="btn" onclick="comentar('sim')">Sim</button>
+                    <button type="button" class="btn" data-dismiss="modal">Não</button>
+                    <div id="s_com_sim">
+                      <textarea id="coment"></textarea>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+              <div id="ler_comentario">
+
+
 
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="comentar('enviar')">Save changes</button>
-              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="comentar('enviar')">Save changes</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
-    
+  </div>
+  <div>
+    <footer>
+        <p id="footer">&copy; Grupo 5 - Engenharia de Requisitos 2019/2020</p>
+    </footer>
+  </div>
 
-    <!-- Button trigger modal -->
-        
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  
-    <script>
+
+
+
+
+  <!-- Button trigger modal -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+
+  <script>
+
+    function abrir() {
+      ShowSelection();
+
+      if (selectedText.length > 0) {
+        $("#exampleModal").modal()
+        ler_comentario();
+        comentar();
+
+      }
+    }
+
+    var selectedText;
+    function ShowSelection() {
+
       var textComponent = document.getElementById('texto');
-      var selectedText;
-      function abrir(){
-        ShowSelection();
-
-        if (selectedText.length > 0){
-          $("#exampleModal").modal()
-          comentar();
-        } 
+      if (textComponent.selectionStart !== undefined) {// Standards Compliant Version
+        var startPos = textComponent.selectionStart;
+        var endPos = textComponent.selectionEnd;
+        selectedText = textComponent.value.substring(startPos, endPos);
       }
-      
+      else if (document.selection !== undefined) {// IE Version
+        textComponent.focus();
+        var sel = document.selection.createRange();
+        selectedText = sel.text;
+      }
+      document.getElementById("demo").innerHTML = selectedText;
+    }
 
-      
-      var comentarios = '<%= comentarios %>';
-      console.log(comentarios);
-      //var comentarios = [];
+    function ler_comentario() {
 
-      var s_com = document.getElementById("s_com");
-      var s_com_sim = document.getElementById("s_com_sim");
+      var comment = $.trim($("#coment").val());
+      var data = {};
 
-      function comentar(texto){
-        console.log(texto);
-        console.log(comentarios);
-        s_com_sim.style.display = "none";
-        if(comentarios =! [] && texto ==! "sim") {
-          s_com.style.display = "none";
-        } 
+      data.what = "ler_comentario";
+      data.id = selectedText;
 
-        if(texto == 'sim'){
-          s_com_sim.style.display = "block";
+      $.ajax({
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        url: '/',
+        success: function (data1) {
+
+
+          $("#ler_comentario").empty(); 
+
+          console.log($('#ler_comentario').removeData);
+
+          console.log('success');
+          console.log(JSON.stringify(data1));
+
+          console.log(data1.length);
+
+          if (data1.length == 0) {
+            document.getElementById("ler_comentario").innerHTML = "<span id='1'>Não existem comentários!</span>";
+
+          } else {
+
+            //var tickets = data.tickets;
+            for (var i = 0; i < data1.length; i++) {
+              var panelBody = "";
+              panelBody += '<div id="2" class="card">';
+              panelBody += '<div class="card-header">';
+              panelBody += (i+1)+'º Comentário';
+              panelBody += '</div>';
+              panelBody += '<div class="card-body">';
+              panelBody += '<blockquote class="blockquote mb-0">';
+              panelBody += '<p>'+data1[i][1]+'</p>';
+              panelBody += '<footer class="blockquote-footer">'+data1[i][2]+'</footer>';
+              panelBody += '</blockquote>';
+              panelBody += '</div>';
+              panelBody += '</div>';
+              panelBody += '<br>';
+              $('#ler_comentario').append(panelBody);
+            }
+
+          }
+
+
+    
+
         }
+      });
 
-        if(texto == "enviar"){
-          //comentarios.push("selectedText");
 
-          $.post("/",
-          {
-            texto: selectedText
-          },
-          function(data,status){
-            alert("Data: " + data + "\nStatus: " + status);
-          });
+    }
 
-        }
-        console.log(comentarios)
+    var s_com = document.getElementById("s_com");
+    var s_com_sim = document.getElementById("s_com_sim");
 
+    function comentar(texto) {
+
+      console.log(texto);
+      s_com_sim.style.display = "none";
+      if (texto == ! "sim") {
+        s_com.style.display = "none";
       }
 
+      if (texto == 'sim') {
+        s_com_sim.style.display = "block";
+      }
 
+      if (texto == "enviar") {
+        var comment = $.trim($("#coment").val());
+        var data = {};
 
-      function ShowSelection()
-        {
-            
+        data.what = "enviar_comentario";
+        data.id = selectedText;
+        data.comment = comment;
 
-            if (textComponent.selectionStart !== undefined)
-            {// Standards Compliant Version
-              var startPos = textComponent.selectionStart;
-              var endPos = textComponent.selectionEnd;
-              selectedText = textComponent.value.substring(startPos, endPos);
-            }
-            else if (document.selection !== undefined)
-            {// IE Version
-              textComponent.focus();
-              var sel = document.selection.createRange();
-              selectedText = sel.text;
-            }
-            document.getElementById("demo").innerHTML = '"' + selectedText + '"';
-            //alert("You selected: " + selectedText);
-        }
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify(data),
+          contentType: 'application/json',
+          url: '/',
+          success: function (data) {
+            console.log('success');
+            console.log(JSON.stringify(data));
+            ler_comentario();
+          }
+        });
 
-    </script>
+      }
+    }
 
-  </body>
+  </script>
+</body>
+
 </html>
