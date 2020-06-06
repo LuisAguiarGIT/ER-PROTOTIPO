@@ -258,7 +258,6 @@
 
 
     function comentar(texto) {
-
       console.log(texto);
       s_com_sim.style.display = "none";
       if (texto == ! "sim") {
@@ -277,6 +276,8 @@
         data.id = selectedText;
         data.comment = comment;
         data.audio = audioURL;
+        // Marcador
+        data.transcricao = transcricao;
 
         $.ajax({
           type: 'POST',
@@ -289,12 +290,14 @@
             ler_comentario();
 
           }
-        });
+        })
+        document.getElementById("coment").innerHTML = "";
 
       }
     }
 
     let audioURL;
+    let transcricao = "";
     // set up basic variables for app
 
     const record = document.querySelector('.record');
@@ -351,58 +354,58 @@
         mediaRecorder.onstop = function (e) {
           console.log("Dados disponíveis depois de MediaRecorder.stop() ser chamado");
 
-          const clipName = prompt('Introduza o nome do ficheiro audio', 'Nome do ficheiro');
+          // const clipName = prompt('Introduza o nome do ficheiro audio', 'Nome do ficheiro');
 
-          const clipContainer = document.createElement('article');
-          const clipLabel = document.createElement('p');
-          const audio = document.createElement('audio');
-          const deleteButton = document.createElement('button');
-          const downloadButton = document.createElement('a');
+          // const clipContainer = document.createElement('article');
+          // const clipLabel = document.createElement('p');
+          // const audio = document.createElement('audio');
+          // const deleteButton = document.createElement('button');
+          // const downloadButton = document.createElement('a');
 
-          clipContainer.classList.add('clip');
-          audio.setAttribute('controls', '');
-          audio.setAttribute('controls', 'download')
-          deleteButton.textContent = 'Delete';
-          deleteButton.className = 'delete';
+          // clipContainer.classList.add('clip');
+          // audio.setAttribute('controls', '');
+          // audio.setAttribute('controls', 'download')
+          // deleteButton.textContent = 'Delete';
+          // deleteButton.className = 'delete';
 
-          if (clipName === null) {
-            clipLabel.textContent = 'Nome do ficheiro';
-          } else {
-            clipLabel.textContent = clipName;
-          }
+          // if (clipName === null) {
+          //   clipLabel.textContent = 'Nome do ficheiro';
+          // } else {
+          //   clipLabel.textContent = clipName;
+          // }
 
-          clipContainer.appendChild(audio);
-          clipContainer.appendChild(clipLabel);
-          clipContainer.appendChild(deleteButton);
-          recording.appendChild(clipContainer);
-          soundClips.appendChild(recording);
+          // clipContainer.appendChild(audio);
+          // clipContainer.appendChild(clipLabel);
+          // clipContainer.appendChild(deleteButton);
+          // recording.appendChild(clipContainer);
+          // soundClips.appendChild(recording);
 
-          audio.controls = true;
+          // audio.controls = true;
           const blob = new Blob(chunks, { 'type': 'audio/mpeg' });
           chunks = [];
           audioURL = window.URL.createObjectURL(blob);
           console.log(audioURL);
-          audio.src = audioURL;
-          console.log("Gravação interrompida");
-          downloadButton.href = audioURL;
-          downloadButton.download = "ficheiroAudio.mp3";
-          downloadButton.innerHTML = "DOWNLOAD";
-          soundClips.appendChild(downloadButton);
+          // audio.src = audioURL;
+          // console.log("Gravação interrompida");
+          // downloadButton.href = audioURL;
+          // downloadButton.download = "ficheiroAudio.mp3";
+          // downloadButton.innerHTML = "DOWNLOAD";
+          // soundClips.appendChild(downloadButton);
 
-          deleteButton.onclick = function (e) {
-            let evtTgt = e.target;
-            evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-          }
+          // deleteButton.onclick = function (e) {
+          //   let evtTgt = e.target;
+          //   evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+          // }
 
-          clipLabel.onclick = function () {
-            const existingName = clipLabel.textContent;
-            const newClipName = prompt('Introduza um novo nome para o ficheiro de som');
-            if (newClipName === null) {
-              clipLabel.textContent = existingName;
-            } else {
-              clipLabel.textContent = newClipName;
-            }
-          }
+          // clipLabel.onclick = function () {
+          //   const existingName = clipLabel.textContent;
+          //   const newClipName = prompt('Introduza um novo nome para o ficheiro de som');
+          //   if (newClipName === null) {
+          //     clipLabel.textContent = existingName;
+          //   } else {
+          //     clipLabel.textContent = newClipName;
+          //   }
+          // }
         }
 
         mediaRecorder.ondataavailable = function (e) {
@@ -425,14 +428,15 @@
 
       recognition.onresult = function (event) {
         console.log(event);
-        let output = document.createElement("p");
-        output.innerHTML = "";
+        // let output = document.createElement("p");
+        // output.innerHTML = "";
 
         for (let i = 0; i < event.results.length; i++) {
-          output.innerHTML = output.innerHTML + event.results[i][0].transcript;
+          // output.innerHTML = output.innerHTML + event.results[i][0].transcript;
+          transcricao = transcricao + event.results[i][0].transcript;
         }
-        console.log(output);
-        recording.appendChild(output);
+        document.getElementById("coment").append(transcricao + "\n");
+        transcricao = "";
       }
       recognition.start();
     }

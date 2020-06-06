@@ -7,13 +7,9 @@ var file = fs.createWriteStream("comentarios.txt");
 let comentarios = new Array();
 let comentario_exp;
 
-let comentariosAudio = new Array();
-let comentariosAudio_exp;
-
 router.get('/', function (req, res, next) {
   res.render('index', {
     title: 'CodeMent -- IDE', comentarios: comentarios, comentario_exp: comentario_exp,
-    comentariosAudio: comentariosAudio, comentariosAudio_exp: comentariosAudio_exp
   });
 });
 
