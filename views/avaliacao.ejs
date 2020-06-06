@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">    
+    <!-- Style CSS -->
+    <style>
+        body {
+      background-color: #333333;
+    }
+
+    textarea {
+      background: url(http://i.imgur.com/2cOaJ.png);
+      background-attachment: local;
+      background-repeat: no-repeat;
+      padding-left: 30px;
+      padding-top: 10px;
+      border-color: #ccc;
+      background-color: #333;
+      resize: both;
+      font-size: 12px;
+      box-shadow: 1px 10px 10px #222;
+    }
+
+    footer {
+      text-align: center;
+    }
+    #demo{
+      color: #ccc;
+      text-align: center;
+    }
+
+    #footer {
+      color: #ccc;
+    }
+
+    #texto {
+      color: lightskyblue;
+    }coment
+
+    #coment{
+      color: lightskyblue;
+    }
+
+    .comentario{
+      color: lightskyblue;
+    }
+
+    #cabecalho {
+      background-color: #444;
+      border-radius: 10px;
+      height: 80px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 20px;
+      margin-right: 20px;
+      background-image: linear-gradient(#444, #222);
+    }
+
+    #titulo {
+      color: yellow;
+      text-align: center;
+    }
+    #upload{
+      color:#ccc;
+    }
+    </style>    
+    <title>Momento de avaliação</title>
+</head>
+<body>
+    <div class="shadow p-3 mb-5" id="cabecalho">
+        <h1 id="titulo">CodeMent - Avaliação</h1>
+    </div>
+    <div>
+      <p id="demo"></p>
+    </div>
+    <div class="container">
+        <div>
+            <textarea id="texto" wrap="off" rows="20" cols="180" name="texto"></textarea>
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-outline-light" onclick="enviar()">
+                Submeter avaliação
+            </button>
+        </div>
+    </div>
+    <div>
+        <footer>
+          <p id="footer">&copy; Grupo 5 - Engenharia de Requisitos 2019/2020</p>
+        </footer>
+    </div>
+    
+    <!-- Button trigger modal -->
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script>
+      // Set the date we're counting down to
+      var countDownDate = new Date("Jun 25, 2020 11:00:00").getTime();
+      
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+      
+        // Get today's date and time
+        var now = new Date().getTime();
+          
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+          
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+        // Output the result in an element with id="demo"
+        document.getElementById("demo").innerHTML = "Tempo Limite: " + days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+          
+        // If the count down is over, write some text 
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "TERMINOU O TEMPO LIMITE!";
+        }
+      }, 1000);
+      </script>
+      <script>
+        function enviar(){
+          alert("Avaliação submetida com sucesso!");
+        }
+      </script>
+</body>
+</html>
