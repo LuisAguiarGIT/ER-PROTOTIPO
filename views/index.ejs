@@ -39,6 +39,14 @@
 
     #texto {
       color: lightskyblue;
+    }coment
+
+    #coment{
+      color: lightskyblue;
+    }
+
+    .comentario{
+      color: lightskyblue;
     }
 
     #cabecalho {
@@ -56,6 +64,10 @@
       color: yellow;
       text-align: center;
     }
+    #upload{
+      color:#ccc;
+    }
+
   </style>
 
   <title><%= title %></title>
@@ -81,6 +93,10 @@
           <button id="launch-bt" type="button" class="btn btn-outline-light" onclick="abrir()">
             Comentários
           </button>
+        </div>
+        <br>
+        <div>
+          <input type="file" name="files[]" id="upload" size=30 accept="">
         </div>
       </form>
 
@@ -110,7 +126,7 @@
                     <button type="button" class="btn" onclick="comentar('sim')">Sim</button>
                     <button type="button" class="btn" data-dismiss="modal">Não</button>
                     <div id="s_com_sim">
-                      <textarea id="coment"></textarea>
+                      <textarea id="coment" class="comentario"></textarea>
                       <!-- Gravação -->
                       <section class="main-controls">
                         <button class="record">COMEÇA GRAVAÇÃO</button>
@@ -440,6 +456,29 @@
       }
       recognition.start();
     }
+  </script>
+  <script>
+    function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+    
+        // use the 1st file from the list
+        f = files[0];
+    
+        var reader = new FileReader();
+    
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+    
+              jQuery( '#texto' ).val( e.target.result );
+            };
+          })(f);
+    
+          // Read in the image file as a data URL.
+          reader.readAsText(f);
+      }
+    
+      document.getElementById('upload').addEventListener('change', handleFileSelect, false);
   </script>
 </body>
 
