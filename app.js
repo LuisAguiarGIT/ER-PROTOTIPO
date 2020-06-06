@@ -9,6 +9,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var backofficeRouter = require('./routes/backoffice');
+var alunoRouter = require('./routes/aluno');
+var avaliacaoRouter = require('./routes/avaliacao');
 
 var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
@@ -29,6 +31,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/backoffice', backofficeRouter);
+app.use('/aluno', alunoRouter);
+app.use('/avaliacao', avaliacaoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
